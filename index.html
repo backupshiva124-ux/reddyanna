@@ -9,45 +9,34 @@
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@600;700&display=swap" rel="stylesheet">
  
 <!-- ============================================================
-  STEP 1 — GOOGLE TAG MANAGER  (replace GTM-XXXXXXX)
-  How to get your ID:
-    1. Go to https://tagmanager.google.com
-    2. Create Account → Container (Web)
-    3. Copy the GTM-XXXXXXX code
+<!-- ============================================================
+  GOOGLE TAG MANAGER
+  Yeh code <head> tag ke bilkul baad pehli line mein lagao
 ============================================================ -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;
-f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-XXXXXXX');
-</script>
+
  
 <!-- ============================================================
-  STEP 2 — GOOGLE ADS GLOBAL TAG  (replace AW-XXXXXXXXXX)
-  How to get your Conversion ID:
-    1. Google Ads → Tools & Settings → Measurement → Conversions
-    2. Create a conversion action → choose "Website"
-    3. Copy "Conversion ID" (AW-XXXXXXXXXX) and "Conversion label"
+  GOOGLE ADS GLOBAL TAG — AW-18148366166
+  Yeh code GTM script ke turant baad lagao
 ============================================================ -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=AW-XXXXXXXXXX"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-18148366166"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){ dataLayer.push(arguments); }
   gtag('js', new Date());
-  gtag('config', 'AW-XXXXXXXXXX');
+  gtag('config', 'AW-18148366166');
  
   /* ── CONVERSION LABELS ─────────────────────────────────────
-     Create ONE conversion action per button in Google Ads,
-     then paste each label below. Example label: "abc123XYZ"
- 
-     Google Ads → Conversions → + New → Website → copy label
+     Aapka Google Ads Conversion ID: AW-18148366166
+     Aapka Conversion Label:         tsM3CIu8pascENau6M1D
+     Sabhi WhatsApp buttons ek hi label use karenge
   ─────────────────────────────────────────────────────────── */
   var CONV = {
-    whatsapp_float:     'AW-XXXXXXXXXX/REPLACE_LABEL_1',
-    whatsapp_hero:      'AW-XXXXXXXXXX/REPLACE_LABEL_2',
-    whatsapp_community: 'AW-XXXXXXXXXX/REPLACE_LABEL_3',
-    newsletter_signup:  'AW-XXXXXXXXXX/REPLACE_LABEL_4',
-    join_community:     'AW-XXXXXXXXXX/REPLACE_LABEL_5'
+    whatsapp_float:     'AW-18148366166/tsM3CIu8pascENau6M1D',
+    whatsapp_hero:      'AW-18148366166/tsM3CIu8pascENau6M1D',
+    whatsapp_community: 'AW-18148366166/tsM3CIu8pascENau6M1D',
+    newsletter_signup:  'AW-18148366166/tsM3CIu8pascENau6M1D',
+    join_community:     'AW-18148366166/tsM3CIu8pascENau6M1D'
   };
  
   /* Fire a Google Ads conversion */
@@ -61,7 +50,6 @@ f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-XXXX
     dataLayer.push(Object.assign({ event: name }, params || {}));
   }
 </script>
- 
 <style>
   :root {
     --red:   #e81c2e;
