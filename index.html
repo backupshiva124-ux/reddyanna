@@ -7,858 +7,573 @@
 <meta name="description" content="Reddy Anna Sports Club – Your go-to community for live cricket scores, football updates, tennis news, and sports discussions across India.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@600;700&display=swap" rel="stylesheet">
+ 
+<!-- ============================================================
+  STEP 1 — GOOGLE TAG MANAGER  (replace GTM-XXXXXXX)
+  How to get your ID:
+    1. Go to https://tagmanager.google.com
+    2. Create Account → Container (Web)
+    3. Copy the GTM-XXXXXXX code
+============================================================ -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;
+f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-XXXXXXX');
+</script>
+ 
+<!-- ============================================================
+  STEP 2 — GOOGLE ADS GLOBAL TAG  (replace AW-XXXXXXXXXX)
+  How to get your Conversion ID:
+    1. Google Ads → Tools & Settings → Measurement → Conversions
+    2. Create a conversion action → choose "Website"
+    3. Copy "Conversion ID" (AW-XXXXXXXXXX) and "Conversion label"
+============================================================ -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-XXXXXXXXXX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){ dataLayer.push(arguments); }
+  gtag('js', new Date());
+  gtag('config', 'AW-XXXXXXXXXX');
+ 
+  /* ── CONVERSION LABELS ─────────────────────────────────────
+     Create ONE conversion action per button in Google Ads,
+     then paste each label below. Example label: "abc123XYZ"
+ 
+     Google Ads → Conversions → + New → Website → copy label
+  ─────────────────────────────────────────────────────────── */
+  var CONV = {
+    whatsapp_float:     'AW-XXXXXXXXXX/REPLACE_LABEL_1',
+    whatsapp_hero:      'AW-XXXXXXXXXX/REPLACE_LABEL_2',
+    whatsapp_community: 'AW-XXXXXXXXXX/REPLACE_LABEL_3',
+    newsletter_signup:  'AW-XXXXXXXXXX/REPLACE_LABEL_4',
+    join_community:     'AW-XXXXXXXXXX/REPLACE_LABEL_5'
+  };
+ 
+  /* Fire a Google Ads conversion */
+  function fireConversion(key) {
+    if (!CONV[key]) return;
+    gtag('event', 'conversion', { send_to: CONV[key], value: 1.0, currency: 'INR' });
+  }
+ 
+  /* Push a GTM dataLayer event */
+  function pushEvent(name, params) {
+    dataLayer.push(Object.assign({ event: name }, params || {}));
+  }
+</script>
+ 
 <style>
   :root {
-    --red:    #e81c2e;
-    --dark:   #0a0a0a;
-    --card:   #111214;
-    --border: #1e2025;
-    --muted:  #6b7280;
-    --white:  #f5f5f5;
-    --accent: #f5a623;
+    --red:   #e81c2e;
+    --dark:  #0a0a0a;
+    --card:  #111214;
+    --bdr:   #1e2025;
+    --muted: #6b7280;
+    --white: #f5f5f5;
+    --gold:  #f5a623;
+    --green: #25D366;
   }
-
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
   html { scroll-behavior: smooth; }
-
-  body {
-    background: var(--dark);
-    color: var(--white);
-    font-family: 'Barlow', sans-serif;
-    font-size: 16px;
-    line-height: 1.6;
-  }
-
+  body { background: var(--dark); color: var(--white); font-family: 'Barlow', sans-serif; font-size: 16px; line-height: 1.6; }
   a { color: inherit; text-decoration: none; }
-
-  /* ── NAV ── */
+ 
+  /* NAV */
   nav {
-    position: sticky; top: 0; z-index: 100;
-    background: rgba(10,10,10,.92);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--border);
-    padding: 0 5%;
-    display: flex; align-items: center; justify-content: space-between;
-    height: 70px;
+    position: sticky; top: 0; z-index: 200;
+    background: rgba(10,10,10,.95); backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--bdr);
+    padding: 0 5%; display: flex; align-items: center; justify-content: space-between; height: 70px;
   }
-
-  .nav-logo {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 1.8rem;
-    letter-spacing: 2px;
-    color: var(--white);
-  }
-  .nav-logo span { color: var(--red); }
-
-  .nav-links { display: flex; gap: 28px; }
-  .nav-links a {
-    font-size: .9rem; font-weight: 600; letter-spacing: .5px;
-    text-transform: uppercase; color: var(--muted);
-    transition: color .2s;
-  }
+  .logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; letter-spacing: 2px; }
+  .logo span { color: var(--red); }
+  .nav-links { display: flex; gap: 28px; align-items: center; }
+  .nav-links a { font-size: .9rem; font-weight: 600; text-transform: uppercase; letter-spacing: .5px; color: var(--muted); transition: color .2s; }
   .nav-links a:hover { color: var(--white); }
-
-  .nav-cta {
-    background: var(--red);
-    color: #fff !important;
-    padding: 9px 22px;
-    border-radius: 4px;
-    font-weight: 700;
-    font-size: .85rem;
-    letter-spacing: .5px;
-    transition: background .2s;
-  }
+  .nav-cta { background: var(--red); color: #fff !important; padding: 9px 22px; border-radius: 4px; font-weight: 700; font-size: .85rem; }
   .nav-cta:hover { background: #c01020; }
-
-  .nav-burger { display: none; cursor: pointer; flex-direction: column; gap: 5px; }
-  .nav-burger span { display: block; width: 24px; height: 2px; background: var(--white); border-radius: 2px; }
-
-  /* ── HERO ── */
+  .burger { display: none; cursor: pointer; flex-direction: column; gap: 5px; }
+  .burger span { display: block; width: 24px; height: 2px; background: var(--white); border-radius: 2px; }
+ 
+  /* TICKER */
+  .ticker { background: var(--red); padding: 10px 0; overflow: hidden; }
+  .ticker-inner { display: flex; gap: 60px; animation: scroll 32s linear infinite; white-space: nowrap; }
+  @keyframes scroll { 0%{ transform:translateX(0) } 100%{ transform:translateX(-50%) } }
+  .tick { font-size: .82rem; font-weight: 600; color: #fff; }
+  .tick::before { content: '● '; opacity: .6; }
+ 
+  /* HERO */
   .hero {
-    min-height: 82vh;
-    display: flex; align-items: center;
+    min-height: 82vh; display: flex; align-items: center;
     background: linear-gradient(135deg, #0a0a0a 0%, #12060a 60%, #0a0a0a 100%);
-    padding: 60px 5%;
-    position: relative; overflow: hidden;
+    padding: 60px 5%; position: relative; overflow: hidden;
   }
-
   .hero::before {
-    content: '';
-    position: absolute; inset: 0;
+    content: ''; position: absolute; inset: 0;
     background: radial-gradient(ellipse 70% 60% at 70% 50%, rgba(232,28,46,.12), transparent);
     pointer-events: none;
   }
-
-  .hero-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 60px; align-items: center;
-    max-width: 1200px; margin: 0 auto; width: 100%;
+  .hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; max-width: 1200px; margin: 0 auto; width: 100%; }
+  .hero-badge {
+    display: inline-block; background: rgba(232,28,46,.15); border: 1px solid rgba(232,28,46,.4);
+    color: var(--red); font-size: .75rem; font-weight: 700; letter-spacing: 2px;
+    text-transform: uppercase; padding: 5px 14px; border-radius: 2px; margin-bottom: 20px;
   }
-
-  .hero-label {
-    display: inline-block;
-    background: rgba(232,28,46,.15);
-    border: 1px solid rgba(232,28,46,.4);
-    color: var(--red);
-    font-size: .75rem; font-weight: 700;
-    letter-spacing: 2px; text-transform: uppercase;
-    padding: 5px 14px; border-radius: 2px;
-    margin-bottom: 20px;
-  }
-
-  .hero h1 {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(2.8rem, 5vw, 5rem);
-    line-height: 1.05; letter-spacing: 1px;
-    margin-bottom: 20px;
-  }
+  .hero h1 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.8rem,5vw,5rem); line-height: 1.05; letter-spacing: 1px; margin-bottom: 20px; }
   .hero h1 span { color: var(--red); }
-
-  .hero p {
-    color: #9ca3af; font-size: 1.05rem; max-width: 480px;
-    margin-bottom: 36px;
+  .hero p { color: #9ca3af; font-size: 1.05rem; max-width: 480px; margin-bottom: 36px; }
+  .btns { display: flex; gap: 16px; flex-wrap: wrap; }
+  .btn-p { background: var(--red); color: #fff; padding: 13px 30px; border-radius: 4px; font-weight: 700; font-size: .95rem; cursor: pointer; border: none; transition: background .2s, transform .15s; display: inline-flex; align-items: center; gap: 8px; }
+  .btn-p:hover { background: #c01020; transform: translateY(-2px); }
+  .btn-o { border: 1px solid var(--bdr); color: var(--white); padding: 13px 30px; border-radius: 4px; font-weight: 600; font-size: .95rem; background: transparent; cursor: pointer; transition: border-color .2s; }
+  .btn-o:hover { border-color: var(--muted); }
+  .stats { display: flex; gap: 36px; flex-wrap: wrap; margin-top: 44px; padding-top: 36px; border-top: 1px solid var(--bdr); }
+  .stat-n { font-family: 'Bebas Neue', sans-serif; font-size: 2.4rem; line-height: 1; }
+  .stat-l { font-size: .78rem; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; margin-top: 4px; }
+ 
+  /* SCORE CARDS */
+  .visuals { display: flex; flex-direction: column; gap: 16px; }
+  .sc { background: var(--card); border: 1px solid var(--bdr); border-radius: 10px; padding: 20px 24px; position: relative; overflow: hidden; }
+  .sc::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: var(--red); }
+  .live-tag { display: flex; align-items: center; gap: 8px; font-size: .72rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
+  .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--gold); animation: blink 1.4s ease-in-out infinite; }
+  @keyframes blink { 0%,100%{ opacity:1 } 50%{ opacity:.3 } }
+  .teams { display: flex; justify-content: space-between; align-items: center; }
+  .tname { font-family: 'Barlow Condensed', sans-serif; font-size: 1.1rem; font-weight: 700; }
+  .tscore { font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; }
+  .tvs { color: var(--muted); font-size: .85rem; font-weight: 600; }
+  .tmeta { margin-top: 10px; font-size: .8rem; color: var(--muted); }
+ 
+  /* SECTIONS */
+  section { padding: 80px 5%; }
+  .slabel { font-size: .72rem; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: var(--red); margin-bottom: 10px; }
+  .stitle { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2rem,3.5vw,3rem); letter-spacing: 1px; margin-bottom: 10px; }
+  .ssub { color: var(--muted); max-width: 560px; font-size: .95rem; margin-bottom: 44px; }
+  .mw { max-width: 1200px; margin: 0 auto; }
+ 
+  /* SPORTS GRID */
+  .sgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 18px; }
+  .scard { background: var(--card); border: 1px solid var(--bdr); border-radius: 10px; padding: 28px 24px; transition: border-color .25s, transform .2s; }
+  .scard:hover { border-color: rgba(232,28,46,.5); transform: translateY(-4px); }
+  .sicon { font-size: 2.4rem; margin-bottom: 16px; display: block; }
+  .sname { font-family: 'Barlow Condensed', sans-serif; font-size: 1.25rem; font-weight: 700; margin-bottom: 6px; }
+  .sdesc { font-size: .82rem; color: var(--muted); line-height: 1.5; }
+  .scnt { margin-top: 14px; font-size: .75rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--red); }
+ 
+  /* NEWS */
+  .ngrid { display: grid; grid-template-columns: 2fr 1fr; gap: 24px; }
+  .nfeat { background: var(--card); border: 1px solid var(--bdr); border-radius: 10px; overflow: hidden; }
+  .nimg { width: 100%; height: 260px; background: linear-gradient(135deg,#1a1a2e,#16213e); display: flex; align-items: center; justify-content: center; font-size: 5rem; }
+  .nbody { padding: 24px; }
+  .ntag { display: inline-block; background: rgba(232,28,46,.15); color: var(--red); border: 1px solid rgba(232,28,46,.3); font-size: .7rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; padding: 3px 10px; border-radius: 2px; margin-bottom: 12px; }
+  .ntitle { font-family: 'Barlow Condensed', sans-serif; font-size: 1.5rem; font-weight: 700; line-height: 1.2; margin-bottom: 10px; }
+  .nexcerpt { font-size: .88rem; color: var(--muted); line-height: 1.55; margin-bottom: 16px; }
+  .nmeta { font-size: .75rem; color: var(--muted); display: flex; gap: 16px; }
+  .nlist { display: flex; flex-direction: column; gap: 14px; }
+  .nmini { background: var(--card); border: 1px solid var(--bdr); border-radius: 8px; padding: 18px; }
+  .nminit { font-size: .68rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
+  .nminih { font-family: 'Barlow Condensed', sans-serif; font-size: 1.05rem; font-weight: 700; line-height: 1.25; margin-bottom: 6px; }
+  .nminim { font-size: .72rem; color: var(--muted); }
+ 
+  /* SCHEDULE */
+  .stable { width: 100%; border-collapse: collapse; }
+  .stable th { text-align: left; padding: 14px 18px; font-size: .75rem; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: var(--muted); border-bottom: 1px solid var(--bdr); }
+  .stable td { padding: 16px 18px; font-size: .88rem; border-bottom: 1px solid rgba(30,32,37,.8); vertical-align: middle; }
+  .stable tr:hover td { background: rgba(255,255,255,.02); }
+  .slive { display: inline-flex; align-items: center; gap: 6px; background: rgba(245,166,35,.12); color: var(--gold); font-size: .72rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; padding: 4px 10px; border-radius: 2px; }
+  .scoming { background: rgba(255,255,255,.05); color: var(--muted); font-size: .72rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; padding: 4px 10px; border-radius: 2px; display: inline-flex; align-items: center; }
+ 
+  /* NEWSLETTER */
+  .nlsec { background: linear-gradient(135deg,#0e0e14,#12060a); border-top: 1px solid var(--bdr); border-bottom: 1px solid var(--bdr); }
+  .nlinner { max-width: 600px; margin: 0 auto; text-align: center; }
+  .nlinner h2 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2rem,3.5vw,2.8rem); margin-bottom: 12px; }
+  .nlinner p { color: var(--muted); margin-bottom: 32px; }
+  .nlform { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+  .nlform input { flex: 1; min-width: 200px; max-width: 280px; background: var(--card); border: 1px solid var(--bdr); color: var(--white); padding: 13px 18px; border-radius: 4px; font-size: .95rem; font-family: 'Barlow', sans-serif; outline: none; transition: border-color .2s; }
+  .nlform input:focus { border-color: var(--red); }
+  .nlform input::placeholder { color: var(--muted); }
+  #nl-ok { display: none; margin-top: 18px; background: rgba(37,211,102,.12); border: 1px solid rgba(37,211,102,.3); color: #25D366; padding: 12px 20px; border-radius: 6px; font-size: .9rem; }
+ 
+  /* COMMUNITY */
+  .comsec { background: linear-gradient(135deg,#12060a,#0e1015); border-top: 1px solid var(--bdr); border-bottom: 1px solid var(--bdr); text-align: center; }
+  .comsec h2 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2rem,4vw,3.5rem); letter-spacing: 1px; margin-bottom: 14px; }
+  .comsec > .mw > p { color: var(--muted); max-width: 500px; margin: 0 auto 36px; }
+  .comfeats { display: flex; justify-content: center; flex-wrap: wrap; gap: 36px; margin-bottom: 44px; }
+  .cf { text-align: center; }
+  .cfi { font-size: 2rem; margin-bottom: 10px; }
+  .cft { font-weight: 700; font-size: .9rem; margin-bottom: 4px; }
+  .cfd { font-size: .8rem; color: var(--muted); max-width: 150px; }
+ 
+  /* WA INLINE CARD */
+  .wacard {
+    background: linear-gradient(135deg,#0d1a10,#0a120d);
+    border: 1px solid rgba(37,211,102,.25); border-radius: 14px;
+    padding: 32px 36px; display: flex; align-items: center;
+    justify-content: space-between; flex-wrap: wrap; gap: 24px; margin-top: 40px;
   }
-
-  .hero-btns { display: flex; gap: 16px; flex-wrap: wrap; }
-
-  .btn-primary {
-    background: var(--red); color: #fff;
-    padding: 13px 30px; border-radius: 4px;
-    font-weight: 700; font-size: .95rem;
-    letter-spacing: .3px;
+  .wacard h3 { font-family: 'Barlow Condensed', sans-serif; font-size: 1.5rem; font-weight: 700; margin-bottom: 6px; }
+  .wacard p { font-size: .88rem; color: var(--muted); }
+  .wabtn {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: var(--green); color: #fff;
+    padding: 13px 28px; border-radius: 8px; font-weight: 700; font-size: .95rem;
+    cursor: pointer; border: none; white-space: nowrap;
     transition: background .2s, transform .15s;
   }
-  .btn-primary:hover { background: #c0102o; transform: translateY(-2px); }
-
-  .btn-outline {
-    border: 1px solid var(--border); color: var(--white);
-    padding: 13px 30px; border-radius: 4px;
-    font-weight: 600; font-size: .95rem;
-    transition: border-color .2s, background .2s;
+  .wabtn:hover { background: #1eb254; transform: translateY(-2px); }
+  .wabtn svg { width: 20px; height: 20px; flex-shrink: 0; }
+ 
+  /* FLOATING WA BUTTON */
+  .wafloat {
+    position: fixed; bottom: 28px; right: 28px; z-index: 9999;
+    display: flex; align-items: center; gap: 12px;
+    background: var(--green); color: #fff;
+    padding: 13px 22px; border-radius: 50px; font-family: 'Barlow', sans-serif;
+    font-weight: 700; font-size: .92rem;
+    box-shadow: 0 6px 24px rgba(37,211,102,.45);
+    cursor: pointer; border: none; text-decoration: none;
+    transition: transform .2s, box-shadow .2s;
   }
-  .btn-outline:hover { border-color: var(--muted); background: rgba(255,255,255,.04); }
-
-  /* Stats strip */
-  .hero-stats {
-    display: flex; gap: 36px; flex-wrap: wrap; margin-top: 44px;
-    padding-top: 36px; border-top: 1px solid var(--border);
+  .wafloat:hover { transform: translateY(-3px); box-shadow: 0 10px 32px rgba(37,211,102,.65); }
+  .wafloat svg { width: 22px; height: 22px; flex-shrink: 0; }
+  .wafloat::before {
+    content: ''; position: absolute; inset: -4px; border-radius: 50px;
+    border: 2px solid rgba(37,211,102,.5);
+    animation: ring 2.2s ease-out infinite;
   }
-  .stat-num {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 2.4rem; color: var(--white); line-height: 1;
-  }
-  .stat-label { font-size: .78rem; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; margin-top: 4px; }
-
-  /* Hero visual */
-  .hero-visual {
-    display: flex; flex-direction: column; gap: 16px;
-  }
-
-  .score-card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 10px; padding: 20px 24px;
-    position: relative; overflow: hidden;
-  }
-  .score-card::before {
-    content: ''; position: absolute; left: 0; top: 0; bottom: 0;
-    width: 3px; background: var(--red);
-  }
-
-  .score-live {
-    display: flex; align-items: center; gap: 8px;
-    font-size: .72rem; font-weight: 700; letter-spacing: 1.5px;
-    text-transform: uppercase; color: var(--accent);
-    margin-bottom: 12px;
-  }
-  .live-dot {
-    width: 7px; height: 7px; border-radius: 50%;
-    background: var(--accent);
-    animation: pulse 1.4s ease-in-out infinite;
-  }
-  @keyframes pulse {
-    0%,100% { opacity: 1; }
-    50% { opacity: .3; }
-  }
-
-  .score-teams { display: flex; justify-content: space-between; align-items: center; }
-  .team-name { font-family: 'Barlow Condensed', sans-serif; font-size: 1.1rem; font-weight: 700; }
-  .team-score {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 1.8rem; color: var(--white);
-  }
-  .score-vs { color: var(--muted); font-size: .85rem; font-weight: 600; }
-  .score-meta { margin-top: 10px; font-size: .8rem; color: var(--muted); }
-
-  /* ── LIVE TICKER ── */
-  .ticker-wrap {
-    background: var(--red);
-    padding: 10px 0; overflow: hidden;
-  }
-  .ticker-inner {
-    display: flex; gap: 60px;
-    animation: ticker 28s linear infinite;
-    white-space: nowrap;
-  }
-  @keyframes ticker {
-    0%   { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
-  }
-  .ticker-item {
-    font-size: .82rem; font-weight: 600;
-    letter-spacing: .3px; color: #fff;
-  }
-  .ticker-item::before { content: '● '; opacity: .6; }
-
-  /* ── SECTION COMMON ── */
-  section { padding: 80px 5%; }
-  .section-label {
-    font-size: .72rem; font-weight: 700; letter-spacing: 2.5px;
-    text-transform: uppercase; color: var(--red);
-    margin-bottom: 10px;
-  }
-  .section-title {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(2rem, 3.5vw, 3rem);
-    letter-spacing: 1px; margin-bottom: 10px;
-  }
-  .section-sub { color: var(--muted); max-width: 560px; font-size: .95rem; margin-bottom: 44px; }
-
-  .max-w { max-width: 1200px; margin: 0 auto; }
-
-  /* ── SPORTS GRID ── */
-  .sports-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-    gap: 18px;
-  }
-
-  .sport-card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 28px 24px;
-    cursor: default;
-    transition: border-color .25s, transform .2s;
-    position: relative; overflow: hidden;
-  }
-  .sport-card:hover {
-    border-color: rgba(232,28,46,.5);
-    transform: translateY(-4px);
-  }
-  .sport-icon { font-size: 2.4rem; margin-bottom: 16px; display: block; }
-  .sport-name {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 1.25rem; font-weight: 700; margin-bottom: 6px;
-  }
-  .sport-desc { font-size: .82rem; color: var(--muted); line-height: 1.5; }
-  .sport-count {
-    margin-top: 14px;
-    font-size: .75rem; font-weight: 700; letter-spacing: 1px;
-    text-transform: uppercase; color: var(--red);
-  }
-
-  /* ── NEWS GRID ── */
-  .news-grid {
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    gap: 24px;
-  }
-
-  .news-featured {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 10px; overflow: hidden;
-  }
-
-  .news-img {
-    width: 100%; height: 260px;
-    background: linear-gradient(135deg, #1a1a2e, #16213e);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 5rem;
-  }
-
-  .news-body { padding: 24px; }
-  .news-tag {
-    display: inline-block;
-    background: rgba(232,28,46,.15); color: var(--red);
-    border: 1px solid rgba(232,28,46,.3);
-    font-size: .7rem; font-weight: 700; letter-spacing: 1.5px;
-    text-transform: uppercase; padding: 3px 10px;
-    border-radius: 2px; margin-bottom: 12px;
-  }
-  .news-title {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 1.5rem; font-weight: 700; line-height: 1.2;
-    margin-bottom: 10px;
-  }
-  .news-excerpt { font-size: .88rem; color: var(--muted); line-height: 1.55; margin-bottom: 16px; }
-  .news-meta { font-size: .75rem; color: var(--muted); display: flex; gap: 16px; }
-
-  .news-list { display: flex; flex-direction: column; gap: 14px; }
-
-  .news-mini {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 8px; padding: 18px;
-    transition: border-color .2s;
-    cursor: default;
-  }
-  .news-mini:hover { border-color: var(--border); }
-  .news-mini-tag {
-    font-size: .68rem; font-weight: 700; letter-spacing: 1px;
-    text-transform: uppercase; color: var(--accent);
-    margin-bottom: 8px;
-  }
-  .news-mini-title {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 1.05rem; font-weight: 700; line-height: 1.25;
-    margin-bottom: 6px;
-  }
-  .news-mini-meta { font-size: .72rem; color: var(--muted); }
-
-  /* ── SCHEDULE TABLE ── */
-  .schedule-table {
-    width: 100%; border-collapse: collapse;
-  }
-  .schedule-table th {
-    text-align: left; padding: 14px 18px;
-    font-size: .75rem; font-weight: 700; letter-spacing: 1.2px;
-    text-transform: uppercase; color: var(--muted);
-    border-bottom: 1px solid var(--border);
-  }
-  .schedule-table td {
-    padding: 16px 18px;
-    font-size: .88rem;
-    border-bottom: 1px solid rgba(30,32,37,.8);
-    vertical-align: middle;
-  }
-  .schedule-table tr:hover td { background: rgba(255,255,255,.02); }
-
-  .status-live {
-    display: inline-flex; align-items: center; gap: 6px;
-    background: rgba(245,166,35,.12);
-    color: var(--accent);
-    font-size: .72rem; font-weight: 700; letter-spacing: 1px;
-    text-transform: uppercase; padding: 4px 10px;
-    border-radius: 2px;
-  }
-  .status-upcoming {
-    display: inline-flex; align-items: center;
-    background: rgba(255,255,255,.05);
-    color: var(--muted);
-    font-size: .72rem; font-weight: 700; letter-spacing: 1px;
-    text-transform: uppercase; padding: 4px 10px;
-    border-radius: 2px;
-  }
-  .status-finished {
-    display: inline-flex; align-items: center;
-    background: rgba(232,28,46,.1);
-    color: var(--red);
-    font-size: .72rem; font-weight: 700; letter-spacing: 1px;
-    text-transform: uppercase; padding: 4px 10px;
-    border-radius: 2px;
-  }
-
-  /* ── COMMUNITY ── */
-  .community-strip {
-    background: linear-gradient(135deg, #12060a, #0e1015);
-    border-top: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
-    text-align: center;
-  }
-
-  .community-strip h2 {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(2rem, 4vw, 3.5rem); letter-spacing: 1px;
-    margin-bottom: 14px;
-  }
-  .community-strip p { color: var(--muted); max-width: 500px; margin: 0 auto 36px; }
-
-  .community-features {
-    display: flex; justify-content: center;
-    flex-wrap: wrap; gap: 36px; margin-bottom: 44px;
-  }
-  .comm-feat { text-align: center; }
-  .comm-feat-icon { font-size: 2rem; margin-bottom: 10px; }
-  .comm-feat-title { font-weight: 700; font-size: .9rem; margin-bottom: 4px; }
-  .comm-feat-desc { font-size: .8rem; color: var(--muted); max-width: 150px; }
-
-  /* ── FOOTER ── */
-  footer {
-    background: #080808;
-    border-top: 1px solid var(--border);
-    padding: 60px 5% 30px;
-  }
-
-  .footer-grid {
-    display: grid;
-    grid-template-columns: 2fr 1fr 1fr 1fr;
-    gap: 48px; margin-bottom: 48px;
-  }
-
-  .footer-brand-name {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 1.8rem; letter-spacing: 2px;
-    margin-bottom: 14px;
-  }
-  .footer-brand-name span { color: var(--red); }
-  .footer-brand-desc { font-size: .85rem; color: var(--muted); line-height: 1.6; max-width: 280px; }
-
-  .footer-col h4 {
-    font-size: .75rem; font-weight: 700; letter-spacing: 1.5px;
-    text-transform: uppercase; color: var(--muted);
-    margin-bottom: 18px;
-  }
-  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
-  .footer-col ul li a { font-size: .875rem; color: #6b7280; transition: color .2s; }
-  .footer-col ul li a:hover { color: var(--white); }
-
-  .footer-bottom {
-    padding-top: 28px;
-    border-top: 1px solid var(--border);
-    display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px;
-  }
-  .footer-bottom p { font-size: .8rem; color: var(--muted); }
-
-  .disclaimer {
-    background: rgba(255,255,255,.03);
-    border: 1px solid var(--border);
-    border-radius: 8px; padding: 18px 22px;
-    margin-top: 32px;
-    font-size: .78rem; color: var(--muted); line-height: 1.6;
-  }
-
-  /* ── MOBILE NAV ── */
-  .mobile-menu {
-    display: none; flex-direction: column;
-    position: fixed; inset: 70px 0 0 0;
-    background: rgba(10,10,10,.98);
-    padding: 32px 5%; z-index: 99;
-    gap: 24px;
-  }
-  .mobile-menu.open { display: flex; }
-  .mobile-menu a {
-    font-size: 1.2rem; font-weight: 600;
-    text-transform: uppercase; letter-spacing: 1px;
-    color: var(--muted); border-bottom: 1px solid var(--border);
-    padding-bottom: 16px;
-  }
-  .mobile-menu a:last-child { border-bottom: none; }
-
-  /* ── RESPONSIVE ── */
-  @media (max-width: 900px) {
+  @keyframes ring { 0%{ transform:scale(1); opacity:.8 } 70%{ transform:scale(1.07); opacity:0 } 100%{ opacity:0 } }
+ 
+  /* FOOTER */
+  footer { background: #080808; border-top: 1px solid var(--bdr); padding: 60px 5% 30px; }
+  .fgrid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 48px; }
+  .fbrand { font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; letter-spacing: 2px; margin-bottom: 14px; }
+  .fbrand span { color: var(--red); }
+  .fdesc { font-size: .85rem; color: var(--muted); line-height: 1.6; max-width: 280px; }
+  .fcol h4 { font-size: .75rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); margin-bottom: 18px; }
+  .fcol ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .fcol ul li a { font-size: .875rem; color: #6b7280; transition: color .2s; }
+  .fcol ul li a:hover { color: var(--white); }
+  .fbot { padding-top: 28px; border-top: 1px solid var(--bdr); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px; }
+  .fbot p { font-size: .8rem; color: var(--muted); }
+  .disc { background: rgba(255,255,255,.03); border: 1px solid var(--bdr); border-radius: 8px; padding: 18px 22px; margin-top: 32px; font-size: .78rem; color: var(--muted); line-height: 1.6; }
+ 
+  /* MOBILE MENU */
+  .mmenu { display: none; flex-direction: column; position: fixed; inset: 70px 0 0 0; background: rgba(10,10,10,.98); padding: 32px 5%; z-index: 199; gap: 24px; }
+  .mmenu.open { display: flex; }
+  .mmenu a { font-size: 1.2rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); border-bottom: 1px solid var(--bdr); padding-bottom: 16px; }
+ 
+  /* RESPONSIVE */
+  @media(max-width:900px) {
     .hero-grid { grid-template-columns: 1fr; }
-    .hero-visual { display: none; }
-    .news-grid { grid-template-columns: 1fr; }
-    .footer-grid { grid-template-columns: 1fr 1fr; }
+    .visuals { display: none; }
+    .ngrid { grid-template-columns: 1fr; }
+    .fgrid { grid-template-columns: 1fr 1fr; }
     .nav-links { display: none; }
-    .nav-burger { display: flex; }
+    .burger { display: flex; }
+    .wafloat { bottom: 20px; right: 16px; padding: 12px 18px; font-size: .85rem; }
   }
-
-  @media (max-width: 600px) {
+  @media(max-width:600px) {
     section { padding: 60px 4%; }
-    .footer-grid { grid-template-columns: 1fr; }
+    .fgrid { grid-template-columns: 1fr; }
     .hero { padding: 48px 4%; min-height: auto; }
+    .wacard { flex-direction: column; text-align: center; padding: 24px; }
   }
 </style>
 </head>
 <body>
-
-<!-- NAV -->
+ 
+<!-- GTM noscript -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-XXXXXXX"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+ 
+<!-- ── NAV ── -->
 <nav>
-  <div class="nav-logo">Reddy<span>Anna</span></div>
+  <div class="logo">Reddy<span>Anna</span></div>
   <div class="nav-links">
     <a href="#sports">Sports</a>
     <a href="#news">News</a>
     <a href="#schedule">Schedule</a>
     <a href="#community">Community</a>
-    <a href="#" class="nav-cta">Join Club</a>
+    <a href="#community" class="nav-cta"
+       onclick="fireConversion('join_community'); pushEvent('join_club_click',{loc:'nav'});">
+      Join Club
+    </a>
   </div>
-  <div class="nav-burger" id="burger">
-    <span></span><span></span><span></span>
-  </div>
+  <div class="burger" id="burger"><span></span><span></span><span></span></div>
 </nav>
-
-<div class="mobile-menu" id="mobileMenu">
+ 
+<div class="mmenu" id="mmenu">
   <a href="#sports">Sports</a>
   <a href="#news">News</a>
   <a href="#schedule">Schedule</a>
   <a href="#community">Community</a>
-  <a href="#">Join Club</a>
+  <a href="#community" onclick="fireConversion('join_community'); pushEvent('join_club_click',{loc:'mobile'});">Join Club</a>
 </div>
-
-<!-- LIVE TICKER -->
-<div class="ticker-wrap">
-  <div class="ticker-inner" id="ticker">
-    <span class="ticker-item">IND vs AUS — Test Day 3: India 342/6</span>
-    <span class="ticker-item">IPL 2026 — MI vs CSK Live at 7:30 PM IST</span>
-    <span class="ticker-item">Roland Garros — Djokovic advances to Round 3</span>
-    <span class="ticker-item">Premier League — Arsenal 2-1 Chelsea FT</span>
-    <span class="ticker-item">PKL Season 11 — Patna Pirates vs UP Yoddhas tonight</span>
-    <span class="ticker-item">ICC Rankings — Rohit Sharma #1 Test Captain</span>
-    <span class="ticker-item">IND vs AUS — Test Day 3: India 342/6</span>
-    <span class="ticker-item">IPL 2026 — MI vs CSK Live at 7:30 PM IST</span>
-    <span class="ticker-item">Roland Garros — Djokovic advances to Round 3</span>
-    <span class="ticker-item">Premier League — Arsenal 2-1 Chelsea FT</span>
-    <span class="ticker-item">PKL Season 11 — Patna Pirates vs UP Yoddhas tonight</span>
-    <span class="ticker-item">ICC Rankings — Rohit Sharma #1 Test Captain</span>
+ 
+<!-- ── LIVE TICKER ── -->
+<div class="ticker">
+  <div class="ticker-inner">
+    <span class="tick">IND vs AUS — Test Day 3: India 342/6</span>
+    <span class="tick">IPL 2026 — MI vs CSK Live 7:30 PM IST</span>
+    <span class="tick">Roland Garros — Djokovic advances Round 3</span>
+    <span class="tick">Premier League — Arsenal 2-1 Chelsea FT</span>
+    <span class="tick">PKL Season 11 — Patna Pirates vs UP Yoddhas</span>
+    <span class="tick">ICC Rankings — Rohit Sharma #1 Test Captain</span>
+    <span class="tick">IND vs AUS — Test Day 3: India 342/6</span>
+    <span class="tick">IPL 2026 — MI vs CSK Live 7:30 PM IST</span>
+    <span class="tick">Roland Garros — Djokovic advances Round 3</span>
+    <span class="tick">Premier League — Arsenal 2-1 Chelsea FT</span>
+    <span class="tick">PKL Season 11 — Patna Pirates vs UP Yoddhas</span>
+    <span class="tick">ICC Rankings — Rohit Sharma #1 Test Captain</span>
   </div>
 </div>
-
-<!-- HERO -->
+ 
+<!-- ── HERO ── -->
 <section class="hero">
   <div class="hero-grid">
     <div>
-      <span class="hero-label">🏏 Live Sports Hub</span>
+      <span class="hero-badge">🏏 Live Sports Hub</span>
       <h1>India's Sports<br><span>Community</span><br>Club</h1>
-      <p>Get live scores, match updates, news, and exclusive sports discussions for cricket, football, tennis, kabaddi, and more — all in one place.</p>
-      <div class="hero-btns">
-        <a href="#community" class="btn-primary">Join Community</a>
-        <a href="#schedule" class="btn-outline">View Schedule</a>
+      <p>Live scores, match updates, news and fan discussions for cricket, football, tennis, kabaddi and more — all in one place.</p>
+      <div class="btns">
+        <!-- TRACKED: whatsapp_hero conversion + GTM event -->
+        <a class="btn-p"
+           href="https://wa.me/917378099145?text=Hi%21+I+want+to+join+the+Reddy+Anna+Sports+Community+group+for+live+match+updates."
+           target="_blank" rel="noopener"
+           onclick="fireConversion('whatsapp_hero'); pushEvent('whatsapp_click',{loc:'hero',label:'Join Community WA'});">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Join on WhatsApp
+        </a>
+        <a class="btn-o" href="#schedule" onclick="pushEvent('schedule_click',{loc:'hero'});">View Schedule</a>
       </div>
-      <div class="hero-stats">
-        <div>
-          <div class="stat-num">50K+</div>
-          <div class="stat-label">Members</div>
-        </div>
-        <div>
-          <div class="stat-num">12+</div>
-          <div class="stat-label">Sports Covered</div>
-        </div>
-        <div>
-          <div class="stat-num">24/7</div>
-          <div class="stat-label">Live Updates</div>
-        </div>
+      <div class="stats">
+        <div><div class="stat-n">50K+</div><div class="stat-l">Members</div></div>
+        <div><div class="stat-n">12+</div><div class="stat-l">Sports Covered</div></div>
+        <div><div class="stat-n">24/7</div><div class="stat-l">Live Updates</div></div>
       </div>
     </div>
-    <div class="hero-visual">
-      <div class="score-card">
-        <div class="score-live"><span class="live-dot"></span> Live — IPL 2026</div>
-        <div class="score-teams">
-          <div>
-            <div class="team-name">Mumbai Indians</div>
-            <div class="team-score">186/4</div>
-          </div>
-          <div class="score-vs">vs</div>
-          <div style="text-align:right">
-            <div class="team-name">Chennai Super Kings</div>
-            <div class="team-score">162/7</div>
-          </div>
+    <div class="visuals">
+      <div class="sc">
+        <div class="live-tag"><span class="dot"></span> Live — IPL 2026</div>
+        <div class="teams">
+          <div><div class="tname">Mumbai Indians</div><div class="tscore">186/4</div></div>
+          <div class="tvs">vs</div>
+          <div style="text-align:right"><div class="tname">Chennai Super Kings</div><div class="tscore">162/7</div></div>
         </div>
-        <div class="score-meta">Over 17.4 · MI need 25 runs off 14 balls</div>
+        <div class="tmeta">Over 17.4 · MI need 25 off 14 balls</div>
       </div>
-      <div class="score-card">
-        <div class="score-live" style="color:#60a5fa"><span class="live-dot" style="background:#60a5fa"></span> Live — Roland Garros</div>
-        <div class="score-teams">
-          <div>
-            <div class="team-name">Djokovic</div>
-            <div class="team-score" style="font-size:1.3rem">6-4, 6-2</div>
-          </div>
-          <div class="score-vs">vs</div>
-          <div style="text-align:right">
-            <div class="team-name">Zverev</div>
-            <div class="team-score" style="font-size:1.3rem">—</div>
-          </div>
+      <div class="sc">
+        <div class="live-tag" style="color:#60a5fa"><span class="dot" style="background:#60a5fa"></span> Live — Roland Garros</div>
+        <div class="teams">
+          <div><div class="tname">Djokovic</div><div class="tscore" style="font-size:1.3rem">6-4, 6-2</div></div>
+          <div class="tvs">vs</div>
+          <div style="text-align:right"><div class="tname">Zverev</div><div class="tscore" style="font-size:1.3rem">—</div></div>
         </div>
-        <div class="score-meta">Court Philippe-Chatrier · Set 2 Complete</div>
+        <div class="tmeta">Philippe-Chatrier · Set 2 Complete</div>
       </div>
-      <div class="score-card">
-        <div class="score-live" style="color:#34d399"><span class="live-dot" style="background:#34d399"></span> FT — Premier League</div>
-        <div class="score-teams">
-          <div>
-            <div class="team-name">Arsenal</div>
-            <div class="team-score">2</div>
-          </div>
-          <div class="score-vs">vs</div>
-          <div style="text-align:right">
-            <div class="team-name">Chelsea</div>
-            <div class="team-score">1</div>
-          </div>
+      <div class="sc">
+        <div class="live-tag" style="color:#34d399"><span class="dot" style="background:#34d399"></span> FT — Premier League</div>
+        <div class="teams">
+          <div><div class="tname">Arsenal</div><div class="tscore">2</div></div>
+          <div class="tvs">vs</div>
+          <div style="text-align:right"><div class="tname">Chelsea</div><div class="tscore">1</div></div>
         </div>
-        <div class="score-meta">Emirates Stadium · Matchday 36</div>
+        <div class="tmeta">Emirates Stadium · Matchday 36</div>
       </div>
     </div>
   </div>
 </section>
-
-<!-- SPORTS -->
-<section id="sports" style="background:#0d0d0d; border-top:1px solid var(--border)">
-  <div class="max-w">
-    <p class="section-label">What We Cover</p>
-    <h2 class="section-title">Sports We Follow</h2>
-    <p class="section-sub">From cricket grounds to football pitches, our community tracks every major sport with live updates and in-depth discussions.</p>
-    <div class="sports-grid">
-      <div class="sport-card">
-        <span class="sport-icon">🏏</span>
-        <div class="sport-name">Cricket</div>
-        <div class="sport-desc">IPL, T20 World Cup, ODIs, Test matches, and all major international series.</div>
-        <div class="sport-count">● Live Now</div>
-      </div>
-      <div class="sport-card">
-        <span class="sport-icon">⚽</span>
-        <div class="sport-name">Football</div>
-        <div class="sport-desc">Premier League, La Liga, Champions League, ISL, and FIFA tournaments.</div>
-        <div class="sport-count">● 3 Matches Today</div>
-      </div>
-      <div class="sport-card">
-        <span class="sport-icon">🎾</span>
-        <div class="sport-name">Tennis</div>
-        <div class="sport-desc">All four Grand Slams, ATP, WTA, and Davis Cup coverage.</div>
-        <div class="sport-count">● Roland Garros Live</div>
-      </div>
-      <div class="sport-card">
-        <span class="sport-icon">🤼</span>
-        <div class="sport-name">Kabaddi</div>
-        <div class="sport-desc">Pro Kabaddi League season updates and player performance stats.</div>
-        <div class="sport-count">● PKL Season 11</div>
-      </div>
-      <div class="sport-card">
-        <span class="sport-icon">🏀</span>
-        <div class="sport-name">Basketball</div>
-        <div class="sport-desc">NBA highlights, Indian basketball, and international tournaments.</div>
-        <div class="sport-count">● NBA Playoffs</div>
-      </div>
-      <div class="sport-card">
-        <span class="sport-icon">🏸</span>
-        <div class="sport-name">Badminton</div>
-        <div class="sport-desc">BWF World Tour, Thomas Cup, India Open and player rankings.</div>
-        <div class="sport-count">● Weekly Updates</div>
-      </div>
-      <div class="sport-card">
-        <span class="sport-icon">🏊</span>
-        <div class="sport-name">Other Sports</div>
-        <div class="sport-desc">Athletics, boxing, wrestling, hockey, and Olympic sports from India and globally.</div>
-        <div class="sport-count">● Multi-sport Hub</div>
-      </div>
-      <div class="sport-card">
-        <span class="sport-icon">🏑</span>
-        <div class="sport-name">Hockey</div>
-        <div class="sport-desc">FIH Pro League, Hockey India League, and national team updates.</div>
-        <div class="sport-count">● India Squad News</div>
-      </div>
+ 
+<!-- ── SPORTS ── -->
+<section id="sports" style="background:#0d0d0d;border-top:1px solid var(--bdr)">
+  <div class="mw">
+    <p class="slabel">What We Cover</p>
+    <h2 class="stitle">Sports We Follow</h2>
+    <p class="ssub">From cricket grounds to football pitches, our community tracks every major sport with live updates and deep discussions.</p>
+    <div class="sgrid">
+      <div class="scard"><span class="sicon">🏏</span><div class="sname">Cricket</div><div class="sdesc">IPL, T20 World Cup, ODIs, Tests and all major international series.</div><div class="scnt">● Live Now</div></div>
+      <div class="scard"><span class="sicon">⚽</span><div class="sname">Football</div><div class="sdesc">Premier League, La Liga, Champions League, ISL and FIFA.</div><div class="scnt">● 3 Matches Today</div></div>
+      <div class="scard"><span class="sicon">🎾</span><div class="sname">Tennis</div><div class="sdesc">All four Grand Slams, ATP, WTA and Davis Cup coverage.</div><div class="scnt">● Roland Garros Live</div></div>
+      <div class="scard"><span class="sicon">🤼</span><div class="sname">Kabaddi</div><div class="sdesc">Pro Kabaddi League season updates and player performance stats.</div><div class="scnt">● PKL Season 11</div></div>
+      <div class="scard"><span class="sicon">🏀</span><div class="sname">Basketball</div><div class="sdesc">NBA highlights, Indian basketball and international tournaments.</div><div class="scnt">● NBA Playoffs</div></div>
+      <div class="scard"><span class="sicon">🏸</span><div class="sname">Badminton</div><div class="sdesc">BWF World Tour, Thomas Cup, India Open and player rankings.</div><div class="scnt">● Weekly Updates</div></div>
+      <div class="scard"><span class="sicon">🏑</span><div class="sname">Hockey</div><div class="sdesc">FIH Pro League, Hockey India League and national team updates.</div><div class="scnt">● India Squad News</div></div>
+      <div class="scard"><span class="sicon">🏊</span><div class="sname">More Sports</div><div class="sdesc">Athletics, boxing, wrestling and Olympic sports from India and globally.</div><div class="scnt">● Multi-sport Hub</div></div>
     </div>
   </div>
 </section>
-
-<!-- NEWS -->
+ 
+<!-- ── NEWS ── -->
 <section id="news">
-  <div class="max-w">
-    <p class="section-label">Latest Updates</p>
-    <h2 class="section-title">Sports News & Analysis</h2>
-    <p class="section-sub">Breaking news, match reports, player interviews, and expert analysis from our editorial team.</p>
-    <div class="news-grid">
-      <div class="news-featured">
-        <div class="news-img">🏏</div>
-        <div class="news-body">
-          <span class="news-tag">Cricket</span>
-          <div class="news-title">Rohit Sharma Leads India to Historic Test Series Win in Australia</div>
-          <p class="news-excerpt">India registered a memorable 3-1 Test series victory on Australian soil, with captain Rohit Sharma's leadership and Jasprit Bumrah's bowling spearheading a dominant campaign across five cities.</p>
-          <div class="news-meta">
-            <span>By Reddy Anna Sports</span>
-            <span>May 12, 2026</span>
-            <span>5 min read</span>
-          </div>
+  <div class="mw">
+    <p class="slabel">Latest Updates</p>
+    <h2 class="stitle">Sports News & Analysis</h2>
+    <p class="ssub">Breaking news, match reports, player interviews and expert analysis from our editorial team.</p>
+    <div class="ngrid">
+      <div class="nfeat">
+        <div class="nimg">🏏</div>
+        <div class="nbody">
+          <span class="ntag">Cricket</span>
+          <div class="ntitle">Rohit Sharma Leads India to Historic Test Series Win in Australia</div>
+          <p class="nexcerpt">India registered a memorable 3-1 series victory on Australian soil, with captain Rohit Sharma's leadership and Jasprit Bumrah's bowling spearheading a dominant campaign across five cities.</p>
+          <div class="nmeta"><span>Reddy Anna Sports</span><span>May 12, 2026</span><span>5 min read</span></div>
         </div>
       </div>
-      <div class="news-list">
-        <div class="news-mini">
-          <div class="news-mini-tag">⚽ Football</div>
-          <div class="news-mini-title">Arsenal clinch Premier League title with 3 games to spare</div>
-          <div class="news-mini-meta">May 11, 2026 · 3 min read</div>
-        </div>
-        <div class="news-mini">
-          <div class="news-mini-tag">🎾 Tennis</div>
-          <div class="news-mini-title">Sumit Nagal reaches Roland Garros Round of 16 — best ever Grand Slam run</div>
-          <div class="news-mini-meta">May 11, 2026 · 4 min read</div>
-        </div>
-        <div class="news-mini">
-          <div class="news-mini-tag">🏏 IPL 2026</div>
-          <div class="news-mini-title">Shubman Gill becomes fastest Indian to 1,000 IPL runs in a single season</div>
-          <div class="news-mini-meta">May 10, 2026 · 2 min read</div>
-        </div>
-        <div class="news-mini">
-          <div class="news-mini-tag">🤼 Kabaddi</div>
-          <div class="news-mini-title">Pardeep Narwal breaks all-time PKL tackle points record</div>
-          <div class="news-mini-meta">May 10, 2026 · 3 min read</div>
-        </div>
+      <div class="nlist">
+        <div class="nmini"><div class="nminit">⚽ Football</div><div class="nminih">Arsenal clinch Premier League title with 3 games to spare</div><div class="nminim">May 11, 2026 · 3 min</div></div>
+        <div class="nmini"><div class="nminit">🎾 Tennis</div><div class="nminih">Sumit Nagal reaches Roland Garros Round of 16 — best ever Grand Slam run</div><div class="nminim">May 11, 2026 · 4 min</div></div>
+        <div class="nmini"><div class="nminit">🏏 IPL 2026</div><div class="nminih">Shubman Gill becomes fastest Indian to 1,000 IPL runs in a single season</div><div class="nminim">May 10, 2026 · 2 min</div></div>
+        <div class="nmini"><div class="nminit">🤼 Kabaddi</div><div class="nminih">Pardeep Narwal breaks all-time PKL tackle points record</div><div class="nminim">May 10, 2026 · 3 min</div></div>
       </div>
     </div>
   </div>
 </section>
-
-<!-- SCHEDULE -->
-<section id="schedule" style="background:#0d0d0d; border-top:1px solid var(--border)">
-  <div class="max-w">
-    <p class="section-label">Upcoming Fixtures</p>
-    <h2 class="section-title">Match Schedule</h2>
-    <p class="section-sub">Never miss a match — full schedule of upcoming and live sporting events.</p>
-    <div style="background:var(--card); border:1px solid var(--border); border-radius:10px; overflow:hidden;">
-      <table class="schedule-table">
-        <thead>
-          <tr>
-            <th>Sport</th>
-            <th>Match</th>
-            <th>Date & Time (IST)</th>
-            <th>Venue</th>
-            <th>Status</th>
-          </tr>
-        </thead>
+ 
+<!-- ── SCHEDULE ── -->
+<section id="schedule" style="background:#0d0d0d;border-top:1px solid var(--bdr)">
+  <div class="mw">
+    <p class="slabel">Upcoming Fixtures</p>
+    <h2 class="stitle">Match Schedule</h2>
+    <p class="ssub">Never miss a match — full schedule of upcoming and live sporting events.</p>
+    <div style="background:var(--card);border:1px solid var(--bdr);border-radius:10px;overflow:hidden;">
+      <table class="stable">
+        <thead><tr><th>Sport</th><th>Match</th><th>Date & Time (IST)</th><th>Venue</th><th>Status</th></tr></thead>
         <tbody>
-          <tr>
-            <td>🏏 Cricket — IPL</td>
-            <td><strong>MI vs CSK</strong></td>
-            <td>12 May, 7:30 PM</td>
-            <td>Wankhede, Mumbai</td>
-            <td><span class="status-live"><span class="live-dot"></span> Live</span></td>
-          </tr>
-          <tr>
-            <td>🎾 Tennis — RG</td>
-            <td><strong>Djokovic vs Alcaraz</strong></td>
-            <td>13 May, 3:00 PM</td>
-            <td>Chatrier, Paris</td>
-            <td><span class="status-upcoming">Upcoming</span></td>
-          </tr>
-          <tr>
-            <td>⚽ Football — PL</td>
-            <td><strong>Man City vs Liverpool</strong></td>
-            <td>13 May, 8:00 PM</td>
-            <td>Etihad, Manchester</td>
-            <td><span class="status-upcoming">Upcoming</span></td>
-          </tr>
-          <tr>
-            <td>🏏 Cricket — IND</td>
-            <td><strong>India vs Australia Test</strong></td>
-            <td>14 May, 9:30 AM</td>
-            <td>MCG, Melbourne</td>
-            <td><span class="status-upcoming">Upcoming</span></td>
-          </tr>
-          <tr>
-            <td>🤼 Kabaddi — PKL</td>
-            <td><strong>Patna Pirates vs Jaipur</strong></td>
-            <td>14 May, 8:00 PM</td>
-            <td>Patliputra Arena</td>
-            <td><span class="status-upcoming">Upcoming</span></td>
-          </tr>
-          <tr>
-            <td>⚽ Football — UCL</td>
-            <td><strong>Real Madrid vs Bayern</strong></td>
-            <td>15 May, 12:30 AM</td>
-            <td>Bernabeu, Madrid</td>
-            <td><span class="status-upcoming">Upcoming</span></td>
-          </tr>
-          <tr>
-            <td>🏏 Cricket — IPL</td>
-            <td><strong>RCB vs KKR</strong></td>
-            <td>15 May, 7:30 PM</td>
-            <td>Chinnaswamy, Bangalore</td>
-            <td><span class="status-upcoming">Upcoming</span></td>
-          </tr>
-          <tr>
-            <td>⚽ Football — ISL</td>
-            <td><strong>Bengaluru FC vs Mumbai City</strong></td>
-            <td>16 May, 7:30 PM</td>
-            <td>Sree Kanteerava, Blr</td>
-            <td><span class="status-upcoming">Upcoming</span></td>
-          </tr>
+          <tr><td>🏏 IPL</td><td><strong>MI vs CSK</strong></td><td>12 May, 7:30 PM</td><td>Wankhede, Mumbai</td><td><span class="slive"><span class="dot"></span> Live</span></td></tr>
+          <tr><td>🎾 Roland Garros</td><td><strong>Djokovic vs Alcaraz</strong></td><td>13 May, 3:00 PM</td><td>Chatrier, Paris</td><td><span class="scoming">Upcoming</span></td></tr>
+          <tr><td>⚽ Premier League</td><td><strong>Man City vs Liverpool</strong></td><td>13 May, 8:00 PM</td><td>Etihad, Manchester</td><td><span class="scoming">Upcoming</span></td></tr>
+          <tr><td>🏏 Test Cricket</td><td><strong>India vs Australia</strong></td><td>14 May, 9:30 AM</td><td>MCG, Melbourne</td><td><span class="scoming">Upcoming</span></td></tr>
+          <tr><td>🤼 PKL S11</td><td><strong>Patna Pirates vs Jaipur</strong></td><td>14 May, 8:00 PM</td><td>Patliputra Arena</td><td><span class="scoming">Upcoming</span></td></tr>
+          <tr><td>⚽ UCL</td><td><strong>Real Madrid vs Bayern</strong></td><td>15 May, 12:30 AM</td><td>Bernabeu, Madrid</td><td><span class="scoming">Upcoming</span></td></tr>
+          <tr><td>🏏 IPL</td><td><strong>RCB vs KKR</strong></td><td>15 May, 7:30 PM</td><td>Chinnaswamy, Blr</td><td><span class="scoming">Upcoming</span></td></tr>
+          <tr><td>⚽ ISL</td><td><strong>Bengaluru FC vs Mumbai City</strong></td><td>16 May, 7:30 PM</td><td>Kanteerava, Blr</td><td><span class="scoming">Upcoming</span></td></tr>
         </tbody>
       </table>
     </div>
   </div>
 </section>
-
-<!-- COMMUNITY -->
-<section id="community" class="community-strip">
-  <div class="max-w">
-    <h2>Join the<br><span style="color:var(--red)">Sports Community</span></h2>
-    <p>Connect with thousands of passionate fans, discuss live matches, share predictions, and stay updated on every sporting event.</p>
-    <div class="community-features">
-      <div class="comm-feat">
-        <div class="comm-feat-icon">💬</div>
-        <div class="comm-feat-title">Live Discussions</div>
-        <div class="comm-feat-desc">Chat with fans during live matches</div>
-      </div>
-      <div class="comm-feat">
-        <div class="comm-feat-icon">📊</div>
-        <div class="comm-feat-title">Stats & Analysis</div>
-        <div class="comm-feat-desc">Deep-dive into player & team data</div>
-      </div>
-      <div class="comm-feat">
-        <div class="comm-feat-icon">🔔</div>
-        <div class="comm-feat-title">Match Alerts</div>
-        <div class="comm-feat-desc">Get notified for every match start</div>
-      </div>
-      <div class="comm-feat">
-        <div class="comm-feat-icon">🏆</div>
-        <div class="comm-feat-title">Leaderboards</div>
-        <div class="comm-feat-desc">Fan rankings and prediction contests</div>
-      </div>
+ 
+<!-- ── NEWSLETTER / ALERTS ← TRACKED: newsletter_signup ── -->
+<section class="nlsec" id="alerts">
+  <div class="mw">
+    <div class="nlinner">
+      <p class="slabel" style="text-align:center">Stay Updated</p>
+      <h2>Get Live Score Alerts<br>Straight to You</h2>
+      <p>Enter your name and number — we'll WhatsApp you live score alerts and breaking sports news. Free, zero spam.</p>
+      <form class="nlform" id="alertForm" onsubmit="handleAlert(event)">
+        <input type="text"  id="aname"  placeholder="Your Name"    required autocomplete="name">
+        <input type="tel"   id="aphone" placeholder="WhatsApp No." required
+               pattern="[6-9][0-9]{9}" title="10-digit Indian mobile number">
+        <button type="submit" class="btn-p">🔔 Get Alerts</button>
+      </form>
+      <div id="nl-ok">✅ You're in! Match alerts will arrive on your WhatsApp shortly.</div>
     </div>
-    <a href="#" class="btn-primary" style="display:inline-block; padding:14px 40px; font-size:1rem;">
-      Join Free — It's Open to All
-    </a>
   </div>
 </section>
-
-<!-- FOOTER -->
-<footer>
-  <div class="max-w">
-    <div class="footer-grid">
+ 
+<!-- ── COMMUNITY ── -->
+<section id="community" class="comsec">
+  <div class="mw">
+    <h2>Join the<br><span style="color:var(--red)">Sports Community</span></h2>
+    <p>Connect with thousands of passionate fans. Discuss live matches, share analysis and never miss an update.</p>
+    <div class="comfeats">
+      <div class="cf"><div class="cfi">💬</div><div class="cft">Live Discussions</div><div class="cfd">Chat with fans during live matches</div></div>
+      <div class="cf"><div class="cfi">📊</div><div class="cft">Stats & Analysis</div><div class="cfd">Deep-dive player & team data</div></div>
+      <div class="cf"><div class="cfi">🔔</div><div class="cft">Match Alerts</div><div class="cfd">Notified for every match start</div></div>
+      <div class="cf"><div class="cfi">🏆</div><div class="cft">Fan Leaderboards</div><div class="cfd">Rankings & prediction contests</div></div>
+    </div>
+ 
+    <!-- TRACKED: whatsapp_community conversion -->
+    <div class="wacard">
       <div>
-        <div class="footer-brand-name">Reddy<span>Anna</span></div>
-        <p class="footer-brand-desc">India's trusted sports community for live scores, match discussions, and sports news. We bring passionate fans together across all major sports.</p>
+        <h3>💬 Chat with 50,000+ Sports Fans</h3>
+        <p>Join our WhatsApp sports group for live score updates, match discussions and breaking sports news — instantly.</p>
       </div>
-      <div class="footer-col">
-        <h4>Sports</h4>
-        <ul>
-          <li><a href="#">Cricket</a></li>
-          <li><a href="#">Football</a></li>
-          <li><a href="#">Tennis</a></li>
-          <li><a href="#">Kabaddi</a></li>
-          <li><a href="#">Basketball</a></li>
-          <li><a href="#">Badminton</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Community</h4>
-        <ul>
-          <li><a href="#">Join Club</a></li>
-          <li><a href="#">Live Scores</a></li>
-          <li><a href="#">Match Schedule</a></li>
-          <li><a href="#">Sports News</a></li>
-          <li><a href="#">Discussions</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Info</h4>
-        <ul>
-          <li><a href="#">About Us</a></li>
-          <li><a href="#">Contact</a></li>
-          <li><a href="#">Privacy Policy</a></li>
-          <li><a href="#">Terms of Use</a></li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="disclaimer">
-      <strong>Disclaimer:</strong> Reddy Anna Sports Club is a sports news and community platform. We provide live score updates, match schedules, sports news, and fan discussions. We do not facilitate, promote, or encourage any form of gambling, wagering, or betting activity. All content is intended for sports fans aged 13 and above. For any queries, contact us at support@reddyannasports.in.
-    </div>
-
-    <div class="footer-bottom">
-      <p>© 2026 Reddy Anna Sports Club. All rights reserved.</p>
-      <p>Made for Indian sports fans 🇮🇳</p>
+      <a class="wabtn"
+         href="https://wa.me/917378099145?text=Hi%21+I+want+to+join+the+Reddy+Anna+Sports+Community+WhatsApp+group+for+live+cricket+and+sports+updates."
+         target="_blank" rel="noopener"
+         onclick="fireConversion('whatsapp_community'); pushEvent('whatsapp_click',{loc:'community_card',label:'Join WA Group'});">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Join WhatsApp Group
+      </a>
     </div>
   </div>
+</section>
+ 
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="mw">
+    <div class="fgrid">
+      <div>
+        <div class="fbrand">Reddy<span>Anna</span></div>
+        <p class="fdesc">India's trusted sports community for live scores, match discussions and sports news. Bringing passionate fans together.</p>
+      </div>
+      <div class="fcol">
+        <h4>Sports</h4>
+        <ul><li><a href="#">Cricket</a></li><li><a href="#">Football</a></li><li><a href="#">Tennis</a></li><li><a href="#">Kabaddi</a></li><li><a href="#">Basketball</a></li><li><a href="#">Badminton</a></li></ul>
+      </div>
+      <div class="fcol">
+        <h4>Community</h4>
+        <ul><li><a href="#community">Join Club</a></li><li><a href="#alerts">Match Alerts</a></li><li><a href="#schedule">Schedule</a></li><li><a href="#news">Sports News</a></li></ul>
+      </div>
+      <div class="fcol">
+        <h4>Info</h4>
+        <ul><li><a href="#">About Us</a></li><li><a href="#">Contact</a></li><li><a href="#">Privacy Policy</a></li><li><a href="#">Terms of Use</a></li></ul>
+      </div>
+    </div>
+    <div class="disc"><strong>Disclaimer:</strong> Reddy Anna Sports Club is a sports news and fan community platform. We provide live score updates, match schedules, sports news and fan discussions. We do not facilitate, promote or encourage any form of gambling, wagering or betting activity. All content is intended for sports fans aged 13 and above.</div>
+    <div class="fbot"><p>© 2026 Reddy Anna Sports Club. All rights reserved.</p><p>Made for Indian sports fans 🇮🇳</p></div>
+  </div>
 </footer>
-
+ 
+<!-- ── FLOATING WHATSAPP BUTTON ← TRACKED: whatsapp_float ── -->
+<a class="wafloat"
+   href="https://wa.me/917378099145?text=Hi%21+I+want+to+join+the+Reddy+Anna+Sports+Community+group+for+live+match+updates."
+   target="_blank" rel="noopener"
+   onclick="fireConversion('whatsapp_float'); pushEvent('whatsapp_click',{loc:'floating_button',label:'Float CTA'});">
+  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  Join Sports Group
+</a>
+ 
 <script>
-  // Mobile menu toggle
-  const burger = document.getElementById('burger');
-  const menu = document.getElementById('mobileMenu');
-  burger.addEventListener('click', () => menu.classList.toggle('open'));
-  menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => menu.classList.remove('open')));
+// ── Mobile menu ──────────────────────────────────────────────
+const burger = document.getElementById('burger');
+const mmenu  = document.getElementById('mmenu');
+burger.addEventListener('click', () => mmenu.classList.toggle('open'));
+mmenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mmenu.classList.remove('open')));
+ 
+// ── Alert / Newsletter form ──────────────────────────────────
+function handleAlert(e) {
+  e.preventDefault();
+  var name  = document.getElementById('aname').value.trim();
+  var phone = document.getElementById('aphone').value.trim();
+ 
+  // 1. Fire Google Ads conversion
+  fireConversion('newsletter_signup');
+ 
+  // 2. Push GTM dataLayer event
+  pushEvent('newsletter_signup', { loc: 'alerts_section', has_name: !!name, has_phone: !!phone });
+ 
+  // 3. Pre-fill WhatsApp message and open
+  var msg = encodeURIComponent('Hi! My name is ' + name + '. Please add me (' + phone + ') to Reddy Anna Sports alerts group for live cricket and sports updates.');
+  window.open('https://wa.me/917378099145?text=' + msg, '_blank');
+ 
+  // 4. Show success
+  document.getElementById('nl-ok').style.display = 'block';
+  e.target.reset();
+}
+ 
+// ── Scroll-depth tracking (GTM audiences) ───────────────────
+var depths = {25:0, 50:0, 75:0, 90:0};
+window.addEventListener('scroll', function() {
+  var pct = Math.round((window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100);
+  Object.keys(depths).forEach(function(d) {
+    if (!depths[d] && pct >= +d) { depths[d] = 1; pushEvent('scroll_depth', {percent: +d}); }
+  });
+}, { passive: true });
+ 
+// ── Page view (GTM) ──────────────────────────────────────────
+pushEvent('page_view', { page_title: document.title, page_path: window.location.pathname });
 </script>
 </body>
 </html>
